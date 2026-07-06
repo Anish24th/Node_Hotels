@@ -29,25 +29,27 @@ router.get('/',async(req,res)=>{
     }
 })
 
-router.get('/:workType',async(req,res)=>{
-try{
-const workType=req.params.workType;
-if(workType=='chef'||workType=='manager'||workType=='waiter'){
+router.get('/:workType', async (req, res) => {
+    try {
+        const workType = req.params.workType;
 
-const response = await Person.find({work: workType});
-console.log('Data fetched');
-res.status(200).json(data);
+        if (workType === 'chef' || workType === 'manager' || workType === 'waiter') {
 
-}else{
+            const response = await Person.find({ work: workType });
 
-res.status(400).json({error : 'Invalid work type'});
+            console.log('Data fetched');
+            res.status(200).json(response);
 
-}
-}catch(err){
-console.log(err);
-res.status(500).json({error : 'Internal server error'});
-}
-})
+        } else {
+
+            res.status(400).json({ error: 'Invalid work type' });
+
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 router.put('/:id',async (req,res)=>{
     try{
