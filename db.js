@@ -10,6 +10,8 @@ mongoose.connect(mongoURL)
 .catch(err => {
     console.log("MongoDB connection failed:", err);
 });
+console.log("MONGODB_URL exists:", !!process.env.MONGODB_URL);
+console.log("Starts with:", process.env.MONGODB_URL?.substring(0, 25));
 
 const db = mongoose.connection;
 
