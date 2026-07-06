@@ -1,9 +1,11 @@
 const express = require('express');
 const app = express();
 const db= require('./db');
+require('.env').config();
 
 const bodyParser=require('body-parser');   //body parser
 app.use(bodyParser.json());          //everything will be saved in req.body
+const PORT = process.env.PORT || 3000;
 
 app.get('/', function (req, res) {
     res.send('Hello World')
@@ -17,7 +19,8 @@ const menuRoute=require('./routes/menuItemRoutes');
 app.use('/person',personRoute);  
 app.use('/menu',menuRoute);
 
-app.listen(3000,()=>{
+
+app.listen(PORT,()=>{
     console.log("Server is live")
 })
 
